@@ -29,7 +29,7 @@ function registro() {
     .then(response => {
         // Verifique se a resposta foi bem-sucedida
         if (!response.ok) {
-            throw new Error('Erro ao fazer o registro');
+            return response.json();
         }
         // Retorne os dados da resposta como texto
         return response.text();
