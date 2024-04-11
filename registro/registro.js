@@ -8,15 +8,15 @@ function registro() {
     var confirmacaoSenha = document.getElementById('confirmacaoSenha').value;
 
     var data = {
-        id: "string",
+        id: '0',  
         nome: nome,
         sobrenome: sobrenome,
         dataNascimento: dataNascimento,
-        telefone: telefone,
+        telefone: telefone,  
         email: email,
         senha: senha,
         confirmacaoSenha: confirmacaoSenha,
-        perfil: ["string"]
+        perfil: [] 
     };
 
     fetch('https://caiobadev-api-arqtool.azurewebsites.net/api/Usuarios/Cadastro/Cliente', {
@@ -27,18 +27,17 @@ function registro() {
         body: JSON.stringify(data)
     })
     .then(response => {
-        console.log(data);
         // Verifique se a resposta foi bem-sucedida
         if (!response.ok) {
             throw new Error('Erro ao fazer o registro');
         }
-        // Retorne os dados da resposta como JSON
-        return response.json();
+        // Retorne os dados da resposta como texto
+        return response.text();
     })
     .then(data => {
-        // Faça algo com os dados retornados, como redirecionar o usuário ou exibir uma mensagem
+        // Faça algo com os dados retornados
         console.log('Resposta:', data);
-        alert('Registro bem-sucedido!');
+        alert(data);  // Mostrar a mensagem de texto diretamente
     })
     .catch(error => {
         // Capture e exiba quaisquer erros
@@ -46,4 +45,3 @@ function registro() {
         alert('Erro ao fazer o registro: ' + error.message);
     });
 }
-
