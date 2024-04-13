@@ -34,3 +34,6 @@ function login() {
     });
 }
 
+function irParaRegistro() {
+    window.location.href= "../registro/registro.html";
+}

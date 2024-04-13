@@ -45,3 +45,7 @@ function registro() {
         alert('Erro ao fazer o registro: ' + error.message);
     });
 }
+
+function irParaLogin() {
+    window.location.href="../index.html"
+}

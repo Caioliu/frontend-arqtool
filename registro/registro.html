@@ -4,53 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./registro.css">
 </head>
 <body>
     
+    <div class="container">
 
-    <div class="registration-form">
-        <h2>Formulario de Registro de Cliente</h2>
-        <hr/>
-    
-        <div class="form-group">
-            <label for="nome">Nome</label>
-            <input type="text" id="nome">
+        <div class="info">
+            <h1 class="info-title">ArqTool</h1>
+        
+            <div class="greeting">
+                <div class="greeting-title">Bem-Vindo de Volta!</div>
+                
+                <div class="greeting-description">
+                    <div>Acesse sua conta agora mesmo</div>
+                </div>
+            </div>
+        
+            <button class="register-button" onClick="irParaLogin()">Login</button>
         </div>
-    
-        <div class="form-group">
-            <label for="sobrenome">Sobrenome</label>
-            <input type="text" id="sobrenome">
-        </div>
-    
-        <div class="form-group">
-            <label for="dataNascimento">Data de Nascimento AAAA-MM-DD</label>
-            <input type="text" id="dataNascimento">
-        </div>
-    
-        <div class="form-group">
-            <label for="telefone">Telefone</label>
-            <input type="text" id="telefone">
-        </div>
-    
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="text" id="email">
-        </div>
-    
-        <div class="form-group">
-            <label for="senha">Senha</label>
-            <input type="password" id="senha">
-        </div>
-    
-        <div class="form-group">
-            <label for="confirmacaoSenha">Confirmação de Senha</label>
-            <input type="password" id="confirmacaoSenha">
-        </div>
-    
-        <button onclick="registro()">Registro</button>
-    </div>    
 
-    <a href="../index.html">Página de Login</a>
+        <div class="registration-form">
+            <h2>Formulario de Registro de Cliente</h2>
+        
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome">
+            </div>
+        
+            <div class="form-group">
+                <label for="sobrenome">Sobrenome</label>
+                <input type="text" id="sobrenome">
+            </div>
+        
+            <div class="form-group">
+                <label for="dataNascimento">Data de Nascimento AAAA-MM-DD</label>
+                <input type="text" id="dataNascimento">
+            </div>
+        
+            <div class="form-group">
+                <label for="telefone">Telefone</label>
+                <input type="text" id="telefone">
+            </div>
+        
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" id="email">
+            </div>
+        
+            <div class="form-group">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha">
+            </div>
+        
+            <div class="form-group">
+                <label for="confirmacaoSenha">Confirmação de Senha</label>
+                <input type="password" id="confirmacaoSenha">
+            </div>
+        
+            <button onclick="registro()">Registro</button>
+        </div>    
+
+    </div>
+
     <script src="registro.js"></script>
 </body>
 </html>
