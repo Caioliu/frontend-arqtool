@@ -30,7 +30,7 @@ function login() {
     .catch(error => {
         // Capture e exiba quaisquer erros
         console.error('Erro:', error);
-        alert('Erro ao fazer login: ' + error.message);
+        alert(error.message);
     });
 }
 

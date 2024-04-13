@@ -28,22 +28,21 @@ function registro() {
     })
     .then(response => {
         // Verifique se a resposta foi bem-sucedida
-        if (!response.ok) {
-            return response.json();
+        if (response.ok) {
+            return response.text(); // Retorna os dados da resposta como texto
+        } else {
+            return response.json(); // Retorna os dados da resposta como JSON
         }
-        // Retorne os dados da resposta como texto
-        return response.text();
     })
     .then(data => {
         // Faça algo com os dados retornados
         console.log('Resposta:', data);
-        alert(data);  // Mostrar a mensagem de texto diretamente
+        if (typeof data === 'string') {
+            alert(data);  // Mostrar a mensagem de texto diretamente
+        } else {
+            alert(data.title);  // Mostrar a mensagem de erro do JSON
+        }
     })
-    .catch(error => {
-        // Capture e exiba quaisquer erros
-        console.error('Erro:', error);
-        alert('Erro ao fazer o registro: ' + error.message);
-    });
 }
 
 function irParaLogin() {
