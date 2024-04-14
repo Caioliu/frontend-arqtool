@@ -39,13 +39,13 @@
             </div>
         
             <div class="form-group">
-                <label for="dataNascimento">Data de Nascimento AAAA-MM-DD</label>
-                <input type="text" id="dataNascimento">
+                <label for="dataNascimento">Data de Nascimento</label>
+                <input type="text" id="dataNascimento" oninput="formatarDataNascimento(this)">
             </div>
         
             <div class="form-group">
                 <label for="telefone">Telefone</label>
-                <input type="text" id="telefone">
+                <input type="text" id="telefone" oninput="formatarTelefone(this)">
             </div>
         
             <div class="form-group">
@@ -56,15 +56,16 @@
             <div class="form-group">
                 <label for="senha">Senha</label>
                 <input type="password" id="senha">
+                <button type="button" onclick="toggleVisibility()" tabindex="-1">🙈</button>
             </div>
         
             <div class="form-group">
                 <label for="confirmacaoSenha">Confirmação de Senha</label>
                 <input type="password" id="confirmacaoSenha">
+                <button type="button" onclick="toggleVisibility()" tabindex="-1">🙈</button>
             </div>
         
-            <button onclick="registro()">Registro</button>
-        </div>    
+            <button onclick="registro()" id="registro">Registro</button>        </div>    
 
     </div>
 
