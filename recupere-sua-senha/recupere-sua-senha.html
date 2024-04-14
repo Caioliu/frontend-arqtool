@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="icon" href="../assets/logo.png" type="image/png">
+    <link rel="stylesheet" href="recupere-sua-senha.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="button-return">
+            <button class="return-button" onclick="retornarParaLogin()">⬅️</button>
+        </div>
+
+        <div class="recovery-password-form">
+            <h2 class="form-title">Recupere sua senha</h2>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" id="email" class="input-field">
+            </div>
+
+            <div class="form-group">
+                <label for="dataNascimento">Data de Nascimento</label>
+                <input type="text" id="dataNascimento" oninput="formatarDataNascimento(this)" class="input-field">
+            </div>
+
+            <div class="form-group">
+                <label for="telefone">Telefone</label>
+                <input type="text" id="telefone" oninput="formatarTelefone(this)" class="input-field">
+            </div>
+
+            <div class="form-group">
+                <label for="senha">Nova Senha</label>
+                <input type="password" id="senha" class="input-field">
+                <button type="button" onclick="toggleVisibility()" tabindex="-1" class="visibility-button">🙈</button>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmacaoSenha">Confirmação de Senha</label>
+                <input type="password" id="confirmacaoSenha" class="input-field">
+                <button type="button" onclick="toggleVisibility()" tabindex="-1" class="visibility-button">🙈</button>
+            </div>
+
+            <button onclick="recuperarSenha()" class="submit-button">Recuperar</button>
+        </div>
+
+    </div>
+
+    <script src="recupere-sua-senha.js"></script>
+</body>
+
+</html>
