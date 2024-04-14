@@ -36,7 +36,7 @@ function login() {
 })
 .catch(error => {
     // Capture e exiba quaisquer erros
-    console.error('Erro:', error.errors);
+    console.error('Erros:', error.errors);
     alert("Erros de autenticação aconteceram. F12 para mais informações.");
 });
 

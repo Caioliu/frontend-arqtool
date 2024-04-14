@@ -1,4 +1,4 @@
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
         registro();
     }
@@ -16,44 +16,42 @@ async function registro() {
     var confirmacaoSenha = document.getElementById('confirmacaoSenha').value;
 
     var data = {
-        id: '0',  
+        id: '0',
         nome: nome,
         sobrenome: sobrenome,
         dataNascimento: dataNascimentoFormatada,
-        telefone: telefoneFormatado,  
+        telefone: telefoneFormatado,
         email: email,
         senha: senha,
         confirmacaoSenha: confirmacaoSenha,
-        perfil: [] 
+        perfil: []
     };
 
     fetch('https://caiobadev-api-arqtool.azurewebsites.net/api/Usuarios/Cadastro/Cliente', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-})
-.then(response => {
-    if (!response.ok) {
-        // Se a resposta não for bem-sucedida, lance um erro
-        throw response;
-    }
-    // Se a resposta for bem-sucedida, retorne os dados
-    return response.json();
-})
-.then(data => {
-    // Faça algo com os dados retornados
-    console.log('Resposta:', data);
-    alert(data.title);  // Mostrar a mensagem de erro do JSON
-})
-.catch(error => {
-    // Trata qualquer erro que possa ter ocorrido anteriormente
-    error.json().then(errorMessage => {
-        console.log(errorMessage.errors);
-        alert("Erros de validação aconteceram. F12 para mais informações.");  // Mostrar a mensagem de erro do JSON
-    })  
-});
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => {
+            if (!response.ok) {
+                // Se a resposta não for bem-sucedida, lance um erro
+                return response.json().then(err => { throw err; });
+            }
+            // Se a resposta for bem-sucedida, retorne os dados
+            return response.json();
+        })
+        .then(data => {
+            // Faça algo com os dados retornados, como redirecionar o usuário ou exibir uma mensagem
+            console.log('Resposta:', data);
+            alert('Registro realizado com sucesso, redirecionando para página de login...');
+        })
+        .catch(error => {
+            // Capture e exiba quaisquer erros
+            console.error('Erros:', error.errors);
+            alert("Erros de autenticação aconteceram. F12 para mais informações.");
+        });
 
 }
 
@@ -158,5 +156,5 @@ function formatarDataNascimento(input) {
 }
 
 function irParaLogin() {
-    window.location.href="../index.html"
+    window.location.href = "../index.html"
 }

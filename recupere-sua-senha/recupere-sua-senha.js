@@ -1,6 +1,6 @@
 document.addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
-        recuperarSenha()();
+        recuperarSenha();
     }
 });
 
@@ -31,20 +31,20 @@ async function recuperarSenha() {
         .then(response => {
             if (!response.ok) {
                 // Se a resposta não for bem-sucedida, lance um erro
-                throw response;
+                return response.json().then(err => { throw err; })
             }
             // Se a resposta for bem-sucedida, retorne os dados
             return response.json();
         })
         .then(data => {
-            // Faça algo com os dados retornados
+            // Faça algo com os dados retornados, como redirecionar o usuário ou exibir uma mensagem
             console.log('Resposta:', data);
-            alert("Senha redefinida com Sucesso!");  // Mostrar a mensagem de erro do JSON
+            alert('Redefinição de Senha bem-sucedida!');
         })
         .catch(error => {
-            // Trata qualquer erro que possa ter ocorrido anteriormente
-            console.log(error);
-            alert("Erros de validação aconteceram. F12 para mais informações.")
+            // Capture e exiba quaisquer erros
+            console.error('Erros:', error.errors);
+            alert("Ocorreu um erro ao processar sua solicitação. Pressione F12 para mais informações.");
         });
 }
 
@@ -148,6 +148,6 @@ function formatarDataNascimento(input) {
 }
 
 function retornarParaLogin() {
-    window.location.href="../index.html";
+    window.location.href = "../index.html";
 }
 
