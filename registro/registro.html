@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,68 +8,72 @@
     <link rel="stylesheet" href="./registro.css">
     <link rel="icon" href="../assets/logo.png" type="image/png">
 </head>
+
 <body>
-    
+
     <div class="container">
 
-        <div class="info">
-            <h1 class="info-title">ArqTool</h1>
-        
-            <div class="greeting">
-                <div class="greeting-title">Bem-Vindo de Volta!</div>
-                
-                <div class="greeting-description">
-                    <div>Acesse sua conta agora mesmo</div>
+        <div class="content first-content">
+
+            <div class="first-column">
+                <h2 class="title title-primary">ArqTool</h2>
+                <p class="description description-primary">Bem-vindo de volta!</p>
+                <p class="description description-primary">Acesse sua conta agora mesmo.</p>
+                <button id="signin" class="btn btn-primary" onClick="irParaLogin()">Entrar</button>
+            </div>
+
+            <div class="second-column">
+                <h2 class="title title-second">Crie sua conta</h2>
+
+                <div class="form">
+                    <label class="label-input" for="">
+                        <i class="far fa-user icon-modify"></i>
+                        <input id="nome" type="text" placeholder="Nome">
+                    </label>
+
+                    <label class="label-input" for="">
+                        <i class="far fa-user icon-modify"></i>
+                        <input id="sobrenome" type="text" placeholder="Sobrenome">
+                    </label>
+
+                    <label class="label-input" for="">
+                        <i class="far fa-user icon-modify"></i>
+                        <input type="text" id="dataNascimento" oninput="formatarDataNascimento(this)"
+                            placeholder="Data de Nascimento">
+                    </label>
+
+                    <label class="label-input" for="">
+                        <i class="far fa-user icon-modify"></i>
+                        <input type="text" id="telefone" oninput="formatarTelefone(this)" placeholder="Telefone">
+                    </label>
+
+                    <label class="label-input" for="">
+                        <i class="far fa-user icon-modify"></i>
+                        <input id="email" type="text" placeholder="E-mail">
+                    </label>
+
+                    <label class="label-input" for="">
+                        <i class="fas fa-lock icon-modify"></i>
+                        <input id="senha" type="password" placeholder="Senha">
+                        <button type="button" onclick="toggleVisibility()" tabindex="-1">🙈</button>
+                    </label>
+
+                    <label class="label-input" for="">
+                        <i class="fas fa-lock icon-modify"></i>
+                        <input id="confirmacaoSenha" type="password" placeholder="Confirmação de Senha">
+                        <button type="button" onclick="toggleVisibility()" tabindex="-1">🙈</button>
+                    </label>
+
+                    <button class="btn btn-second" onclick="registro()" id="registro">Registro</button>
                 </div>
             </div>
-        
-            <button class="register-button" onClick="irParaLogin()">Login</button>
-        </div>
 
-        <div class="registration-form">
-            <h2>Crie sua conta</h2>
-        
-            <div class="form-group">
-                <label for="nome">Nome</label>
-                <input type="text" id="nome">
-            </div>
-        
-            <div class="form-group">
-                <label for="sobrenome">Sobrenome</label>
-                <input type="text" id="sobrenome">
-            </div>
-        
-            <div class="form-group">
-                <label for="dataNascimento">Data de Nascimento</label>
-                <input type="text" id="dataNascimento" oninput="formatarDataNascimento(this)">
-            </div>
-        
-            <div class="form-group">
-                <label for="telefone">Telefone</label>
-                <input type="text" id="telefone" oninput="formatarTelefone(this)">
-            </div>
-        
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" id="email">
-            </div>
-        
-            <div class="form-group">
-                <label for="senha">Senha</label>
-                <input type="password" id="senha">
-                <button type="button" onclick="toggleVisibility()" tabindex="-1">🙈</button>
-            </div>
-        
-            <div class="form-group">
-                <label for="confirmacaoSenha">Confirmação de Senha</label>
-                <input type="password" id="confirmacaoSenha">
-                <button type="button" onclick="toggleVisibility()" tabindex="-1">🙈</button>
-            </div>
-        
-            <button onclick="registro()" id="registro">Registro</button>        </div>    
+        </div>
 
     </div>
 
     <script src="registro.js"></script>
 </body>
+
+
 </html>

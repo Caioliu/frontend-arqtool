@@ -1,25 +1,297 @@
-/* Centralizar conteúdo na página */
+
+/* Fonte Teste */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #f4f4f4; /* Cor de fundo de exemplo */
+    height: 150vh;
+    background-color: #ecf0f1;
+    border-radius: 20px;
+}
+.content {
+    background-color: #fff;
+    border-radius: 15px;
+    width: 960px;
+    height: 50%;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    border-radius: 20px;
+}
+.content::before {
+    content: "";
+    position: absolute;
+    background-color: #1F4173;
+    width: 40%;
+    height: 100%;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+
+
+    left: 0;
+}
+.title {
+    font-size: 28px;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+.title-primary {
+    color: #fff;
+}
+.title-second {
+    color: #1F4173;
+}
+.description {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 30px;
+}
+.description-primary {
+    color: #fff;
+}
+.description-second {
+    color: #1F4173;
+}
+.btn {
+    border-radius: 15px;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 10px;
+    padding: 10px 50px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 150px;
+    align-self: center;
+    border: none;
+    margin-top: 1rem;
+}
+.btn-primary {
+    background-color: transparent;
+    border: 1px solid #fff;
+    transition: background-color .5s;
+}
+.btn-primary:hover {
+    background-color: #fff;
+    color: #1F4173;
+}
+.btn-second {
+    background-color: #1F4173;
+    border: 1px solid #1F4173;
+    transition: background-color .5s;
+}
+.btn-second:hover {
+    background-color: #fff;
+    border: 1px solid #1F4173;
+    color: #1F4173;
+}
+.first-content {
+    display: flex;
+}
+.first-content .second-column {
+    z-index: 11;
+}
+.first-column {
+    text-align: center;
+    width: 40%;
+    z-index: 10;
+}
+.second-column {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* Estilo para o formulário de login */
-.registration-form {
-    background-color: #ffffff; /* Cor de fundo do formulário */
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    margin-right: 20px; /* Espaçamento entre os elementos */
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+}
+.form input {
+    height: 45px;
+    width: 100%;
+    border: none;
+    background-color: #ecf0f1;
+}
+input:-webkit-autofill 
+{    
+    -webkit-box-shadow: 0 0 0px 1000px #ecf0f1 inset !important;
+    -webkit-text-fill-color: #000 !important;
+}
+.label-input {
+    background-color: #ecf0f1;
+    display: flex;
+    align-items: center;
+    margin: 8px;
+    border-radius: 30px;
+}
+.icon-modify {
+    color: #1F4173;
+    padding: 0 5px;
 }
 
-/* Estilo para a seção de informações */
-.info {
-    background-color: #ffffff; /* Cor de fundo da seção de informações */
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+
+
+
+
+/*ANIMAÇÃOO CSS PARA O CONTEÚDO*/
+
+@keyframes deslocamentoEsq {
+
+    from {
+        left: 0;
+        opacity: 1;
+        z-index: 12;
+    }
+
+    25% {
+        left: -80px;
+        opacity: .5;
+    }
+
+    50% {
+        left: -100px;
+        opacity: .2;
+    }
+
+    to {
+        left: -110px;
+        opacity: 0;
+        z-index: -1;
+    }
+}
+
+
+@keyframes deslocamentoDir {
+
+    from {
+        left: 0;
+        z-index: 12;
+    }
+
+    25% {
+        left: 80px;
+    }
+
+    50% {
+        left: 100px;
+    }
+
+    to {
+        left: 110px;
+        z-index: -1;
+    }
+}
+
+
+/*ANIMAÇÃO CSS*/
+
+@keyframes slidein {
+
+    from {
+        left: 0;
+        width: 40%;
+    }
+
+    25% {
+        left: 5%;
+        width: 50%;
+    }
+
+    50% {
+        left: 25%;
+        width: 60%;
+    }
+
+    75% {
+        left: 45%;
+        width: 50%;
+    }
+
+    to {
+        left: 60%;
+        width: 40%;
+    }
+}
+
+@keyframes slideout {
+
+    from {
+        left: 60%;
+        width: 40%;
+    }
+
+    25% {
+        left: 45%;
+        width: 50%;
+    }
+
+    50% {
+        left: 25%;
+        width: 60%;
+    }
+
+    75% {
+        left: 5%;
+        width: 50%;
+    }
+
+    to {
+        left: 0;
+        width: 40%;
+    }
+}
+
+/*VERSÃO MOBILE*/
+@media screen and (max-width: 1040px) {
+    .content {
+        width: 100%;
+        height: 100%;
+    }
+
+    .content::before {
+        width: 100%;
+        height: 40%;
+        top: 0;
+        border-radius: 0;
+    }
+    .first-content, .second-content {
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .first-column, .second-column {
+        width: 100%;
+    }
+
+    }
+
+    .form {
+        width: 90%;
+    }
+    
+  
+
+@media screen and (max-width: 740px) {
+    .form {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .form {
+        width: 100%;
+    }
 }
