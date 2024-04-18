@@ -49,21 +49,13 @@ async function recuperarSenha() {
 }
 
 function toggleVisibility() {
-    var senha = document.getElementById('senha');
-    var confirmacaoSenha = document.getElementById('confirmacaoSenha');
-    var botaoSenha = document.querySelector('#senha + button');
-    var botaoConfirmacaoSenha = document.querySelector('#confirmacaoSenha + button');
-
-    if (senha.type === "password") {
-        senha.type = "text";
-        confirmacaoSenha.type = "text";
-        botaoSenha.textContent = '👁️';
-        botaoConfirmacaoSenha.textContent = '👁️';
-    } else {
-        senha.type = "password";
-        confirmacaoSenha.type = "password";
-        botaoSenha.textContent = '🙈';
-        botaoConfirmacaoSenha.textContent = '🙈';
+    var imagens = document.querySelectorAll('.fechadoR');
+    for (var i = 0; i < imagens.length; i++) {
+        if (imagens[i].src.endsWith('olho-fechado.png')) {
+            imagens[i].src = '../assets/olho-aberto.png';
+        } else {
+            imagens[i].src = '../assets/olho-fechado.png';
+        }
     }
 }
 

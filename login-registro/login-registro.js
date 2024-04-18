@@ -1,0 +1,264 @@
+function login() {
+    var email = document.getElementById('emailL').value;
+    var senha = document.getElementById('senhaL').value;
+
+    var data = {
+        email: email,
+        senha: senha
+    };
+
+    fetch('https://caiobadev-api-arqtool.azurewebsites.net/api/Autenticacao/Login', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+})
+.then(response => {
+    // Verifique se a resposta foi bem-sucedida
+    if (!response.ok) {
+        // Se a resposta não for bem-sucedida, lance um erro
+        return response.json().then(err => { throw err; });
+    }
+    // Retorne os dados da resposta como JSON
+    return response.json();
+})
+.then(data => {
+    // Faça algo com os dados retornados, como redirecionar o usuário ou exibir uma mensagem
+    console.log('Resposta:', data);
+    alert('Login bem-sucedido!');
+})
+.catch(error => {
+    // Capture e exiba quaisquer erros
+    console.error('Erros:', error.errors);
+    alert("Erros de autenticação aconteceram. F12 para mais informações.");
+});
+
+}
+
+function irParaRegistro() {
+    window.location.href= "../registro/registro.html";
+}
+
+//Início do Javascript de Registro
+
+
+async function registro() {
+    var { nome, sobrenome } = separaNomeSobrenome(document.getElementById('nomeCompletoR').value);
+    var dataNascimento = document.getElementById('dataNascimentoR').value;
+    var dataNascimentoFormatada = formatarDataNascimentoAnoMesDia(dataNascimento);
+    var telefone = document.getElementById('telefoneR').value;
+    var telefoneFormatado = await formatarTelefoneToInteger(telefone);
+    var email = document.getElementById('emailR').value;
+    var senha = document.getElementById('senhaR').value;
+    var confirmacaoSenha = document.getElementById('confirmacaoSenhaR').value;
+
+    var data = {
+        id: '0',
+        nome: nome,
+        sobrenome: sobrenome,
+        dataNascimento: dataNascimentoFormatada,
+        telefone: telefoneFormatado,
+        email: email,
+        senha: senha,
+        confirmacaoSenha: confirmacaoSenha,
+        perfil: []
+    };
+
+    fetch('https://caiobadev-api-arqtool.azurewebsites.net/api/Usuarios/Cadastro/Cliente', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => {
+            if (!response.ok) {
+                // Se a resposta não for bem-sucedida, lance um erro
+                return response.json().then(err => { throw err; });
+            }
+            // Se a resposta for bem-sucedida, retorne os dados
+            return response.json();
+        })
+        .then(data => {
+            // Faça algo com os dados retornados, como redirecionar o usuário ou exibir uma mensagem
+            console.log('Resposta:', data);
+            alert('Registro realizado com sucesso, redirecionando para página de login...');
+        })
+        .catch(error => {
+            // Capture e exiba quaisquer erros
+            console.error('Erros:', error.errors);
+            alert("Erros de autenticação aconteceram. F12 para mais informações.");
+        });
+
+}
+
+function separaNomeSobrenome(nomeCompleto) {
+    var partes = nomeCompleto.split(' ');
+    var nome = partes[0];
+    var sobrenome = partes.slice(1).join(' ');
+
+    return { nome: nome, sobrenome: sobrenome };
+}
+
+
+function formatarTelefone(input) {
+    let value = input.value;
+    let oldValue = input.defaultValue;
+
+    // Verificar se o usuário está tentando apagar um caractere
+    if (oldValue.length > value.length) {
+        input.defaultValue = value;
+        return;
+    }
+
+    // Remove caracteres não numéricos
+    value = value.replace(/\D/g, '');
+
+    // Formatar de acordo com o número de dígitos
+    if (value.length <= 2) {
+        // Incluir os parênteses após o segundo dígito
+        value = `(${value.slice(0, 2)}`;
+    } else if (value.length <= 6) {
+        // Adicionar um traço após o sexto dígito
+        value = `(${value.slice(0, 2)}) ${value.slice(2, 6)}`;
+    } else if (value.length <= 10) {
+        // Adicionar um traço após o sexto dígito
+        value = `(${value.slice(0, 2)}) ${value.slice(2, 6)}-${value.slice(6, 10)}`;
+    } else {
+        // Reservar os 2 primeiros para o DD, e adicionar o - após o sétimo dígito
+        value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7, 11)}`;
+    }
+
+    // Limitar a 11 caracteres
+    value = value.slice(0, 16);
+
+    input.value = value;
+    input.defaultValue = value;
+}
+
+function formatarTelefoneToInteger(telefone) {
+    var telefoneFormatado = telefone.replace(/\D/g, '');
+    console.log(telefoneFormatado);
+    return telefoneFormatado;
+}
+
+function formatarDataNascimentoAnoMesDia(dataNascimento) {
+
+    // Dividir a data em dia, mês e ano
+    var partesData = dataNascimento.split('/');
+
+    // Reorganizar no formato AAAA-MM-DD
+    var dataFormatada = `${partesData[2]}-${partesData[1]}-${partesData[0]}`;
+
+    return dataFormatada;
+}
+
+function formatarDataNascimento(input) {
+    let value = input.value;
+    let oldValue = input.defaultValue;
+
+    // Verificar se o usuário está tentando apagar um caractere
+    if (oldValue.length > value.length) {
+        input.defaultValue = value;
+        return;
+    }
+
+    // Remove caracteres não numéricos
+    value = value.replace(/\D/g, '');
+
+    // Formatar para DD/MM/AAAA
+    if (value.length > 4) {
+        value = `${value.slice(0, 2)}/${value.slice(2, 4)}/${value.slice(4, 8) || ''}`;
+    } else if (value.length > 2) {
+        value = `${value.slice(0, 2)}/${value.slice(2, 4) || ''}`;
+    }
+
+    // Limitar a 8 caracteres
+    value = value.slice(0, 10);
+
+    input.value = value;
+    input.defaultValue = value;
+}
+
+function irParaLogin() {
+    window.location.href = "../index.html"
+}
+
+//Fim do Javascript de Registro
+
+//Início Javascript Compartilhado
+
+function toggleVisibilityR(senhaId, confirmacaoSenhaId) {
+    var senhaInput = document.getElementById(senhaId); // Seleciona o input da senha pelo ID
+    var confirmacaoSenhaInput = document.getElementById(confirmacaoSenhaId); // Seleciona o input da confirmação da senha pelo ID
+
+    var imagens = document.querySelectorAll('.fechadoR'); // Seleciona todas as imagens dentro dos botões
+
+    // Verifica se o tipo atual do input da senha é 'password'
+    if (senhaInput.type === 'password') {
+        // Se for 'password', muda para 'text' e altera todas as imagens para olho aberto
+        senhaInput.type = 'text';
+        confirmacaoSenhaInput.type = 'text';
+        imagens.forEach(function(imagem) {
+            imagem.src = './assets/olho-aberto.png';
+        });
+    } else {
+        // Caso contrário, muda para 'password' e altera todas as imagens para olho fechado
+        senhaInput.type = 'password';
+        confirmacaoSenhaInput.type = 'password';
+        imagens.forEach(function(imagem) {
+            imagem.src = './assets/olho-fechado.png';
+        });
+    }
+}
+function toggleVisibilityL() {
+    var senhaInput = document.getElementById('senhaL'); // Seleciona o input pelo ID
+    var imagem = document.querySelector('.fechadoL'); // Seleciona a imagem dentro do botão
+
+    // Verifica se o tipo atual do input é 'password'
+    if (senhaInput.type === 'password') {
+        // Se for 'password', muda para 'text' e altera a imagem para olho aberto
+        senhaInput.type = 'text';
+        imagem.src = './assets/olho-aberto.png';
+    } else {
+        // Caso contrário, muda para 'password' e altera a imagem para olho fechado
+        senhaInput.type = 'password';
+        imagem.src = './assets/olho-fechado.png';
+    }
+}
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        var body = document.querySelector("body");
+
+        console.log(body.className === "sign-in-js");
+        console.log(body.className === "sign-up-js")
+
+        if (body.className === "sign-in-js") {
+            login(); }
+
+        if (body.className === "sign-up-js") {
+            registro();
+        }
+    }
+});
+
+var btnSignin = document.querySelector("#signin");
+var btnSignup = document.querySelector("#signup");
+var body = document.querySelector("body");
+
+btnSignin.addEventListener("click", function () {
+   body.classList = "sign-in-js"; 
+});
+
+btnSignup.addEventListener("click", function () {
+    body.classList = "sign-up-js";
+});
+
+
+//Fim Javascript Compartilhado
+
+
+
+
