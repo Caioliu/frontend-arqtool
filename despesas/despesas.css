@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    flex-direction: column; /* Organiza os itens em uma coluna */
+    align-items: center; /* Centraliza os itens horizontalmente */
+    justify-content: center; /* Centraliza os itens verticalmente */
+    height: 100vh; /* Define a altura para 100% da altura da viewport */
+}
+
+#expense-table {
+    border-collapse: collapse; /* Combina as bordas das células adjacentes */
+}
+
+#expense-table th, #expense-table td {
+    border: 1px solid #000; /* Adiciona uma borda preta ao redor de cada célula */
+    padding: 10px; /* Adiciona um pouco de espaço ao redor do texto em cada célula */
+}

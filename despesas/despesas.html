@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Despesas</title>
+    <link rel="icon" href="../assets/logo.png" type="image/png">
+    <link rel="stylesheet" href="./despesas.css">
+</head>
+
+<body>
+    <h1>Listagem de Despesas</h1>
+    <div class="container">
+
+        <!-- Formulário para adicionar despesa -->
+        <form id="expense-form">
+            <input type="text" id="expense-name" placeholder="Nome da despesa">
+            <input type="number" id="monthly-cost" placeholder="Gasto mensal">
+            <button type="submit">Adicionar Despesa</button>
+        </form>
+
+        <!-- Espaçamento -->
+        <br />
+
+        <!-- Tabela para listar despesas -->
+        <table id="expense-table">
+            <thead>
+                <tr>
+                    <th>Descrição</th>
+                    <th>Mês</th>
+                    <th>%</th>
+                    <th>Ano</th>
+                    <th>Hora</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+
+        <!-- Espaçamento -->
+        <br />
+
+        <div>
+            <button>Calcular</button>
+        </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./despesas.js"></script>
+</body>
+
+</html>

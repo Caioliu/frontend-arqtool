@@ -1,4 +1,4 @@
-function login() {
+async function login() {
     var email = document.getElementById('emailL').value;
     var senha = document.getElementById('senhaL').value;
 
@@ -7,37 +7,66 @@ function login() {
         senha: senha
     };
 
-    fetch('https://caiobadev-api-arqtool.azurewebsites.net/api/Autenticacao/Login', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-})
-.then(response => {
-    // Verifique se a resposta foi bem-sucedida
-    if (!response.ok) {
-        // Se a resposta não for bem-sucedida, lance um erro
-        return response.json().then(err => { throw err; });
-    }
-    // Retorne os dados da resposta como JSON
-    return response.json();
-})
-.then(data => {
-    // Faça algo com os dados retornados, como redirecionar o usuário ou exibir uma mensagem
-    console.log('Resposta:', data);
-    alert('Login bem-sucedido!');
-})
-.catch(error => {
-    // Capture e exiba quaisquer erros
-    console.error('Erros:', error.errors);
-    alert("Erros de autenticação aconteceram. F12 para mais informações.");
-});
+    window.location.href = "./despesas/despesas.html";
 
+    // try {
+    //     const response = await fetch('https://caiobadev-api-arqtool.azurewebsites.net/api/Autenticacao/Login', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(data)
+    //     });
+
+    //     // Verifique se a resposta foi bem-sucedida
+    //     if (!response.ok) {
+    //         // Se a resposta não for bem-sucedida, lance um erro
+    //         const err = await response.json();
+    //         throw err;
+    //     }
+
+    //     // Retorne os dados da resposta como JSON
+    //     const responseData = await response.json();
+
+    //     // Verifique se o token e a data de expiração existem no objeto retornado
+    //     const token = responseData.token.token;
+    //     const dataExpiracao = responseData.token.dataExpiracao;
+
+    //     await setTokenEDataValidacao(token, dataExpiracao);
+
+    //     window.location.href = "./despesas/despesas.html";
+
+    // } catch (error) {
+    //     // Capture e exiba quaisquer erros
+    //     console.error('Erros:', error);
+    //     alert("Erros de autenticação aconteceram. F12 para mais informações.");
+    // }
+}
+
+async function setTokenEDataValidacao(token, dataExpiracao) {
+    localStorage.setItem('token', token);
+    localStorage.setItem('dataExpiracao', dataExpiracao);
+    console.log(token);
+}
+
+async function setTokenEDataValidacao(token, dataExpiracao) {
+    localStorage.setItem('token', token);
+    localStorage.setItem('dataExpiracao', dataExpiracao)
 }
 
 function irParaRegistro() {
-    window.location.href= "../registro/registro.html";
+    var body = document.querySelector("body");
+    body.classList = "sign-up-js";
+}
+
+function irParaRecuperarSenha() {
+    var body = document.querySelector("body");
+    body.classList = "sign-up-js";
+
+    // Aguarda 1 segundo (1000 milissegundos) antes de redirecionar
+    setTimeout(function() {
+        window.location.href = "./recupere-sua-senha/recupere-sua-senha.html";
+    }, 180);
 }
 
 //Início do Javascript de Registro
@@ -182,7 +211,8 @@ function formatarDataNascimento(input) {
 }
 
 function irParaLogin() {
-    window.location.href = "../index.html"
+    var body = document.querySelector("body");
+    body.classList = "sign-in-js";
 }
 
 //Fim do Javascript de Registro
@@ -200,14 +230,14 @@ function toggleVisibilityR(senhaId, confirmacaoSenhaId) {
         // Se for 'password', muda para 'text' e altera todas as imagens para olho aberto
         senhaInput.type = 'text';
         confirmacaoSenhaInput.type = 'text';
-        imagens.forEach(function(imagem) {
+        imagens.forEach(function (imagem) {
             imagem.src = './assets/olho-aberto.png';
         });
     } else {
         // Caso contrário, muda para 'password' e altera todas as imagens para olho fechado
         senhaInput.type = 'password';
         confirmacaoSenhaInput.type = 'password';
-        imagens.forEach(function(imagem) {
+        imagens.forEach(function (imagem) {
             imagem.src = './assets/olho-fechado.png';
         });
     }
@@ -228,7 +258,7 @@ function toggleVisibilityL() {
     }
 }
 
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
         var body = document.querySelector("body");
 
@@ -236,7 +266,8 @@ document.addEventListener('keydown', function(event) {
         console.log(body.className === "sign-up-js")
 
         if (body.className === "sign-in-js") {
-            login(); }
+            login();
+        }
 
         if (body.className === "sign-up-js") {
             registro();
@@ -244,21 +275,7 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
-var btnSignin = document.querySelector("#signin");
-var btnSignup = document.querySelector("#signup");
-var body = document.querySelector("body");
-
-btnSignin.addEventListener("click", function () {
-   body.classList = "sign-in-js"; 
-});
-
-btnSignup.addEventListener("click", function () {
-    body.classList = "sign-up-js";
-});
-
-
 //Fim Javascript Compartilhado
-
 
 
 

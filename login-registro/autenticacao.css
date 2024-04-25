@@ -227,6 +227,8 @@ input:-webkit-autofill
     font-size: 14px;
     margin: 15px 0;
     text-align: center;
+    cursor: pointer; 
+    text-decoration: underline; 
 }
 .password::first-letter {
     text-transform: capitalize;
