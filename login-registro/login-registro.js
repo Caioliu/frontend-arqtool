@@ -7,52 +7,53 @@ async function login() {
         senha: senha
     };
 
-    window.location.href = "./despesas/despesas.html";
+    // window.location.href = "./despesas/despesas.html";
 
-    // try {
-    //     const response = await fetch('https://caiobadev-api-arqtool.azurewebsites.net/api/Autenticacao/Login', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify(data)
-    //     });
+    var urlLocal = 'https://localhost:7177/api/';
+    var urlHospedagem = 'https://caiobadev-api-arqtool.azurewebsites.net/api/';
+    var rotaEndpoint = 'v1/Usuario/Login';
 
-    //     // Verifique se a resposta foi bem-sucedida
-    //     if (!response.ok) {
-    //         // Se a resposta não for bem-sucedida, lance um erro
-    //         const err = await response.json();
-    //         throw err;
-    //     }
+    try {
+        const response = await fetch((urlHospedagem + rotaEndpoint), {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
 
-    //     // Retorne os dados da resposta como JSON
-    //     const responseData = await response.json();
+        // Verifique se a resposta foi bem-sucedida
+        if (!response.ok) {
+            // Se a resposta não for bem-sucedida, lance um erro
+            const err = await response.json();
+            throw err;
+        }
 
-    //     // Verifique se o token e a data de expiração existem no objeto retornado
-    //     const token = responseData.token.token;
-    //     const dataExpiracao = responseData.token.dataExpiracao;
+        // Retorne os dados da resposta como JSON
+        const responseData = await response.json();
 
-    //     await setTokenEDataValidacao(token, dataExpiracao);
+        console.log(responseData);
+        await setTokenEDataValidacao(responseData.token, responseData.expiration);
 
-    //     window.location.href = "./despesas/despesas.html";
+        window.location.href = "./despesas/despesas.html";
 
-    // } catch (error) {
-    //     // Capture e exiba quaisquer erros
-    //     console.error('Erros:', error);
-    //     alert("Erros de autenticação aconteceram. F12 para mais informações.");
-    // }
+    } catch (error) {
+        // Capture e exiba quaisquer erros
+        console.error('Erros:', error);
+        alert("Erros de autenticação aconteceram. F12 para mais informações.");
+    }
 }
 
 async function setTokenEDataValidacao(token, dataExpiracao) {
     localStorage.setItem('token', token);
     localStorage.setItem('dataExpiracao', dataExpiracao);
-    console.log(token);
+    console.log(token, dataExpiracao);
 }
 
-async function setTokenEDataValidacao(token, dataExpiracao) {
-    localStorage.setItem('token', token);
-    localStorage.setItem('dataExpiracao', dataExpiracao)
-}
+// async function setTokenEDataValidacao(token, dataExpiracao) {
+//     localStorage.setItem('token', token);
+//     localStorage.setItem('dataExpiracao', dataExpiracao)
+// }
 
 function irParaRegistro() {
     var body = document.querySelector("body");
@@ -73,7 +74,7 @@ function irParaRecuperarSenha() {
 
 
 async function registro() {
-    var { nome, sobrenome } = separaNomeSobrenome(document.getElementById('nomeCompletoR').value);
+    var nome = document.getElementById('nomeCompletoR').value;
     var dataNascimento = document.getElementById('dataNascimentoR').value;
     var dataNascimentoFormatada = formatarDataNascimentoAnoMesDia(dataNascimento);
     var telefone = document.getElementById('telefoneR').value;
@@ -83,43 +84,40 @@ async function registro() {
     var confirmacaoSenha = document.getElementById('confirmacaoSenhaR').value;
 
     var data = {
-        id: '0',
         nome: nome,
-        sobrenome: sobrenome,
         dataNascimento: dataNascimentoFormatada,
         telefone: telefoneFormatado,
         email: email,
         senha: senha,
         confirmacaoSenha: confirmacaoSenha,
-        perfil: []
     };
 
-    fetch('https://caiobadev-api-arqtool.azurewebsites.net/api/Usuarios/Cadastro/Cliente', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-        .then(response => {
-            if (!response.ok) {
-                // Se a resposta não for bem-sucedida, lance um erro
-                return response.json().then(err => { throw err; });
-            }
-            // Se a resposta for bem-sucedida, retorne os dados
-            return response.json();
-        })
-        .then(data => {
-            // Faça algo com os dados retornados, como redirecionar o usuário ou exibir uma mensagem
-            console.log('Resposta:', data);
-            alert('Registro realizado com sucesso, redirecionando para página de login...');
-        })
-        .catch(error => {
-            // Capture e exiba quaisquer erros
-            console.error('Erros:', error.errors);
-            alert("Erros de autenticação aconteceram. F12 para mais informações.");
+    console.log(data);
+
+    var urlLocal = 'https://localhost:7177/api/';
+    var urlHospedagem = 'https://caiobadev-api-arqtool.azurewebsites.net/api/';
+    var rotaEndpoint = 'v1/Usuario/Registro';
+
+    try {
+        const response = await fetch(urlHospedagem + rotaEndpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
         });
 
+        if (!response.ok) {
+            const error = await response.json();
+            throw error;
+        }
+
+        console.log('Resposta:', response);
+        alert('Registro realizado com sucesso, redirecionando para página de login...');
+    } catch (error) {
+        console.error('Erros:', error);
+        alert("Erros de autenticação aconteceram. F12 para mais informações.");
+    }
 }
 
 function separaNomeSobrenome(nomeCompleto) {

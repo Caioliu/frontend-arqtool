@@ -14,3 +14,35 @@
     border: 1px solid #000; /* Adiciona uma borda preta ao redor de cada célula */
     padding: 10px; /* Adiciona um pouco de espaço ao redor do texto em cada célula */
 }
+
+/* Estilo para uma linha da tabela */
+.row-table {
+    background-color: #f2f2f2; /* Cor de fundo da linha */
+}
+
+/* Estilo para a linha da tabela quando o mouse está sobre ela */
+.row-table:hover {
+    background-color: #e0e0e0; /* Altera a cor de fundo quando o mouse está sobre a linha */
+}
+
+/* Estilo para os botões de ação dentro da linha */
+.row-table .btn-delete {
+    background-color: #1F4173; /* Cor de fundo do botão de excluir */
+    color: #fff; /* Cor do texto do botão de excluir */
+    border: none; /* Remove a borda do botão */
+    padding: 5px 10px; /* Espaçamento interno do botão */
+    cursor: pointer; /* Altera o cursor para indicar que o botão é clicável */
+    border-radius: 4px; /* Adiciona bordas arredondadas ao botão */
+    transition: background-color 0.3s ease; /* Suaviza a transição da cor de fundo */
+}
+
+/* Estilo para os botões de ação dentro da linha quando o mouse está sobre eles */
+.row-table .btn-delete:hover {
+    background-color: #fff; /* Altera a cor de fundo quando o mouse está sobre o botão de excluir */
+    color: #1F4173; /* Altera a cor do texto quando o mouse está sobre o botão de excluir */
+}
+
+/* Estilo para os botões de ação dentro da linha quando estão ativos (clicados) */
+.row-table .btn-delete:active {
+    background-color: #1F4173; /* Altera a cor de fundo quando o botão de excluir está ativo */
+}
