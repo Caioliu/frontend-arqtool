@@ -14,7 +14,7 @@ async function login() {
     var rotaEndpoint = 'v1/Usuario/Login';
 
     try {
-        const response = await fetch((urlHospedagem + rotaEndpoint), {
+        const response = await fetch((urlLocal + rotaEndpoint), {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -35,7 +35,8 @@ async function login() {
         console.log(responseData);
         await setTokenEDataValidacao(responseData.token, responseData.expiration);
 
-        window.location.href = "./despesas/despesas.html";
+        //window.location.href = "./despesas/despesas.html";
+        window.location.href = "./valor-hora/valor-hora.html";
 
     } catch (error) {
         // Capture e exiba quaisquer erros
@@ -99,7 +100,7 @@ async function registro() {
     var rotaEndpoint = 'v1/Usuario/Registro';
 
     try {
-        const response = await fetch(urlHospedagem + rotaEndpoint, {
+        const response = await fetch(urlLocal + rotaEndpoint, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
