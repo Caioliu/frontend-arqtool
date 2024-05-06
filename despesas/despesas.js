@@ -38,11 +38,26 @@ async function fetchAndMapDespesas() {
     }
 }
 
+function checkExpenses(expenses) {
+    // Seleciona os botões
+    var btnNext = document.querySelector('.btn-next');
+    var btnCalculate = document.querySelector('.btn-calcular');
 
-document.getElementById('expense-form').addEventListener('submit', async function (event) {
-    // Evita o comportamento padrão do formulário
-    event.preventDefault();
+    // Verifica se o array de despesas está vazio
+    if (expenses.length === 0) {
+        // Se estiver vazio, exibe o botão 'Próximo' e desabilita o botão 'Calcular'
+        btnNext.style.display = 'block';
+        btnCalculate.style.display = 'none';
+    } else {
+        // Se não estiver vazio, exibe o botão 'Calcular' e desabilita o botão 'Próximo'
+        btnNext.style.display = 'none';
+        btnCalculate.style.display = 'block';
+    }
+}
 
+
+// Seleciona o botão de adicionar despesa
+document.getElementById('add-expense-button').addEventListener('click', async function () {
     // Obtém os valores dos inputs
     var expenseName = document.getElementById('expense-name').value.trim(); // Remove espaços em branco
     var monthlyCost = document.getElementById('monthly-cost').value.trim(); // Remove espaços em branco
@@ -89,11 +104,13 @@ document.getElementById('expense-form').addEventListener('submit', async functio
 
         // Remove a linha da tabela
         row.remove();
-        console.log(expenses);
+        checkExpenses(expenses);
     });
 
+    checkExpenses(expenses);
     console.log(expenses);
 });
+
 
 
 function mapearDespesasParaTabela(despesas) {
@@ -195,6 +212,10 @@ async function getUserInfo() {
         alert("Ocorreu um erro ao processar sua solicitação. Pressione F12 para mais informações.");
         throw error; // Você pode optar por relançar o erro ou retornar um valor padrão
     }
+}
+
+function toNextPage() {
+    window.location.href= "../valor-hora/valor-hora.html";
 }
 
 async function postDespesas() {
