@@ -41,7 +41,7 @@ async function getUserInfo() {
     var rotaEndpoint = 'v1/Usuario/Info';
     // Verifica se o token está presente em localStorage
     try {
-        const response = await fetch(urlLocal + rotaEndpoint, {
+        const response = await fetch(urlHospedagem + rotaEndpoint, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ async function getUserInfo() {
 async function getValorIdealHora() {
     var rotaEndpoint = 'ValorIdealHoraTrabalho';
     try {
-        const response = await axios.get(urlLocal + rotaEndpoint, {
+        const response = await axios.get(urlHospedagem + rotaEndpoint, {
             headers: {
                 'Authorization': 'Bearer ' + token // Adicionando o token ao cabeçalho
             }
@@ -138,7 +138,7 @@ async function handleRequest() {
         postDespesas(data);
     } else if (userHoraIdeal) {
         if (compareObjects(data, userHoraIdeal)) {
-            alert("Esses dados já foram cadastrados.");
+            window.location.href = "./hora-tecnica.html"
         } else {
             dataUpdate = {
                 id: userHoraIdeal.id,
@@ -192,7 +192,7 @@ function compareObjects(obj1, obj2) {
 async function updateDespesas(data) {
     var rotaEndpoint = 'ValorIdealHoraTrabalho';
 
-    fetch(urlLocal + rotaEndpoint, {
+    fetch(urlHospedagem + rotaEndpoint, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -224,7 +224,7 @@ async function updateDespesas(data) {
 async function postDespesas(data) {
     var rotaEndpoint = 'ValorIdealHoraTrabalho';
 
-    fetch(urlLocal + rotaEndpoint, {
+    fetch(urlHospedagem + rotaEndpoint, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

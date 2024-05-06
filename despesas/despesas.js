@@ -14,7 +14,7 @@ async function handleDespesas() {
 async function fetchAndMapDespesas() {
     var rotaEndpoint = 'DespesasMensais/Usuario';
     try {
-        const response = await axios.get(urlLocal + rotaEndpoint, {
+        const response = await axios.get(urlHospedagem + rotaEndpoint, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + token // Adicionando o token ao cabeçalho
@@ -155,7 +155,7 @@ document.getElementById('expense-table').addEventListener('click', function(even
 
 // Função para remover a despesa
 async function removerDespesa(despesaId) {
-    var urlRequisicao = urlLocal + "despesasMensais/" + despesaId;
+    var urlRequisicao = urlHospedagem + "despesasMensais/" + despesaId;
     console.log(urlRequisicao);
 
     try {
@@ -189,7 +189,7 @@ async function getUserInfo() {
     var rotaEndpoint = 'v1/Usuario/Info';
     // Verifica se o token está presente em localStorage
     try {
-        const response = await fetch(urlLocal + rotaEndpoint, {
+        const response = await fetch(urlHospedagem + rotaEndpoint, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -221,7 +221,7 @@ function toNextPage() {
 async function postDespesas() {
     var rotaEndpoint = 'DespesasMensais';
 
-    fetch(urlLocal + rotaEndpoint, {
+    fetch(urlHospedagem + rotaEndpoint, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
