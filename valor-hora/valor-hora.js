@@ -1,6 +1,6 @@
 var token = localStorage.getItem("token");
 var urlLocal = 'https://localhost:7177/api/';
-var urlHospedagem = 'https://caiobadev-api-arqtool.azurewebsites.net/api/';
+//var urlHospedagem = 'https://caiobadev-api-arqtool.azurewebsites.net/api/';
 fetchAndMapFields();
 definirNomeBotao();
 
@@ -41,7 +41,7 @@ async function getUserInfo() {
     var rotaEndpoint = 'v1/Usuario/Info';
     // Verifica se o token está presente em localStorage
     try {
-        const response = await fetch(urlHospedagem + rotaEndpoint, {
+        const response = await fetch(urlLocal + rotaEndpoint, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ async function getUserInfo() {
 async function getValorIdealHora() {
     var rotaEndpoint = 'ValorIdealHoraTrabalho';
     try {
-        const response = await axios.get(urlHospedagem + rotaEndpoint, {
+        const response = await axios.get(urlLocal + rotaEndpoint, {
             headers: {
                 'Authorization': 'Bearer ' + token // Adicionando o token ao cabeçalho
             }
@@ -192,7 +192,7 @@ function compareObjects(obj1, obj2) {
 async function updateDespesas(data) {
     var rotaEndpoint = 'ValorIdealHoraTrabalho';
 
-    fetch(urlHospedagem + rotaEndpoint, {
+    fetch(urlLocal + rotaEndpoint, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -224,7 +224,7 @@ async function updateDespesas(data) {
 async function postDespesas(data) {
     var rotaEndpoint = 'ValorIdealHoraTrabalho';
 
-    fetch(urlHospedagem + rotaEndpoint, {
+    fetch(urlLocal + rotaEndpoint, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

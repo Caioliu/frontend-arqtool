@@ -34,7 +34,7 @@ mapResult();
 async function getValorHora() {
     var rotaEndpoint = 'ValorIdealHoraTrabalho';
     try {
-        const response = await axios.get(urlHospedagem + rotaEndpoint, {
+        const response = await axios.get(urlLocal + rotaEndpoint, {
             headers: {
                 'Authorization': 'Bearer ' + token // Adicionando o token ao cabeçalho
             }

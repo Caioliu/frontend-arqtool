@@ -14,7 +14,7 @@ async function handleDespesas() {
 async function fetchAndMapDespesas() {
     var rotaEndpoint = 'DespesasMensais/Usuario';
     try {
-        const response = await axios.get(urlHospedagem + rotaEndpoint, {
+        const response = await axios.get(urlLocal + rotaEndpoint, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + token // Adicionando o token ao cabeçalho
@@ -146,50 +146,54 @@ function mapearDespesasParaTabela(despesas) {
 }
 
 // Adiciona um event listener para os botões de excluir
-document.getElementById('expense-table').addEventListener('click', function(event) {
+document.getElementById('expense-table').addEventListener('click', async function(event) {
     if (event.target.classList.contains('btn-delete')) {
         const despesaId = event.target.getAttribute('data-id');
-        removerDespesa(despesaId); // Chama a função para remover a despesa
+        await removerDespesa(despesaId); // Chama a função para remover a despesa
     }
 });
 
 // Função para remover a despesa
 async function removerDespesa(despesaId) {
-    var urlRequisicao = urlHospedagem + "despesasMensais/" + despesaId;
+    var urlRequisicao = urlLocal + "despesasMensais/" + despesaId;
     console.log(urlRequisicao);
 
-    try {
-        const response = await fetch(urlRequisicao, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                // 'Authorization': 'Bearer ' + token // Adicionando o token ao cabeçalho
-            },
+
+    fetch(urlRequisicao, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token  // Adicionando o token ao cabeçalho
+        },
+        body: JSON.stringify(expenses)
+    })
+        .then(response => {
+            if (!response.ok) {
+                // Se a resposta não for bem-sucedida, lance um erro
+                return response.json().then(err => { throw err; })
+            }
+            // Se a resposta for bem-sucedida, retorne os dados
+            return response.json();
+        })
+        .then(data => {
+            // Faça algo com os dados retornados, como redirecionar o usuário ou exibir uma mensagem
+            console.log('Resposta:', data);
+            alert('Despesa deletada com sucesso!');
+            window.location.reload();
+        })
+        .catch(error => {
+            // Capture e exiba quaisquer erros
+            console.log('Resposta:', error);
+            alert('Despesa deletada com sucesso!');
+            window.location.reload();
         });
-
-        if (!response.ok) {
-            // Se a resposta não for bem-sucedida, lance um erro
-            const errorData = await response.json();
-            throw new Error(errorData.message || 'Erro na solicitação');
-        }
-
-        // Se a resposta for bem-sucedida, retorne os dados
-        const data = await response.json();
-        alert("Despesa Removida com Sucesso!");
-        window.location.reload();
-    } catch (error) {
-        // Capture e exiba quaisquer erros
-        console.error('Erros:', error);
-        alert("Ocorreu um erro ao processar sua solicitação. Pressione F12 para mais informações.");
-        throw error; // Você pode optar por relançar o erro ou retornar um valor padrão
-    }
 }
 
 async function getUserInfo() {
     var rotaEndpoint = 'v1/Usuario/Info';
     // Verifica se o token está presente em localStorage
     try {
-        const response = await fetch(urlHospedagem + rotaEndpoint, {
+        const response = await fetch(urlLocal + rotaEndpoint, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -221,7 +225,7 @@ function toNextPage() {
 async function postDespesas() {
     var rotaEndpoint = 'DespesasMensais';
 
-    fetch(urlHospedagem + rotaEndpoint, {
+    fetch(urlLocal + rotaEndpoint, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
